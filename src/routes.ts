@@ -7,6 +7,8 @@ import { CreatePetController } from "./controllers/Pet/CreatePetController";
 import { GetPetController } from "./controllers/Pet/GetPetController";
 import { DeletePetController } from "./controllers/Pet/DeletePetController";
 import { UpdatePetController } from "./controllers/Pet/UpdatePetController";
+import { CreateMedicaoController } from "./controllers/Medicao/CreateMedicaoController";
+import { GetMedicaoController } from "./controllers/Medicao/GetMedicaoController";
 
 export async function routes(fastify: FastifyInstance, options: FastifyPluginOptions){
 
@@ -44,5 +46,15 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
 
     fastify.patch("/pet", async(request: FastifyRequest, reply: FastifyReply) => {
         return new UpdatePetController().handle(request, reply)
+    })
+
+    //------------------------------ROTAS MEDICAO-------------------------------------
+
+    fastify.post("/medicao", async(request: FastifyRequest, reply: FastifyReply) => {
+        return new CreateMedicaoController().handle(request, reply)
+    })
+
+    fastify.get("/medicoes", async(request: FastifyRequest, reply: FastifyReply) => {
+        return new GetMedicaoController().handle(request, reply)
     })
 }

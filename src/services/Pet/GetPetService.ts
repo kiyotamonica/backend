@@ -5,7 +5,8 @@ class GetPetService {
         
         const pets = await prismaClient.pet.findMany({
             include: {
-                dono: true
+                dono: true,
+                medicoes: true
             }
         })
 
