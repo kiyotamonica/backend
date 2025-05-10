@@ -3,11 +3,14 @@ import { CreateClienteController } from "./controllers/Cliente/CreateClienteCont
 import { GetClienteController } from "./controllers/Cliente/GetClienteController";
 import { DeleteClienteController } from "./controllers/Cliente/DeleteClienteController";
 import { UpdateClienteController } from "./controllers/Cliente/UpdateClienteController";
+import { CreatePetController } from "./controllers/Pet/CreatePetController";
+import { GetPetController } from "./controllers/Pet/GetPetController";
+import { DeletePetController } from "./controllers/Pet/DeletePetController";
+import { UpdatePetController } from "./controllers/Pet/UpdatePetController";
 
 export async function routes(fastify: FastifyInstance, options: FastifyPluginOptions){
-    fastify.get("/teste", async(request: FastifyRequest, reply: FastifyReply) => {
-        return {ok: true}
-    })
+
+    //--------------------------------ROTAS CLIENTE----------------------------------
 
     fastify.get("/clientes", async(request: FastifyRequest, reply: FastifyReply) => {
         return new GetClienteController().handle(request, reply)
@@ -23,5 +26,23 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
 
     fastify.patch("/cliente", async (request: FastifyRequest, reply: FastifyReply) => {
         return new UpdateClienteController().handle(request, reply)
+    })
+
+    //---------------------------------ROTAS PET--------------------------------------
+
+    fastify.post("/pet", async (request: FastifyRequest, reply: FastifyReply) => {
+        return new CreatePetController().handle(request, reply)
+    })
+
+    fastify.get("/pets", async(request: FastifyRequest, reply: FastifyReply) => {
+        return new GetPetController().handle(request, reply)
+    })
+
+    fastify.delete("/pet", async(request: FastifyRequest, reply: FastifyReply) => {
+        return new DeletePetController().handle(request, reply)
+    })
+
+    fastify.patch("/pet", async(request: FastifyRequest, reply: FastifyReply) => {
+        return new UpdatePetController().handle(request, reply)
     })
 }

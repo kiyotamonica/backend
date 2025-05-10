@@ -1,4 +1,3 @@
-import { error } from "console";
 import prismaClient from "../../prisma";
 
 interface DeleteClienteProps{
