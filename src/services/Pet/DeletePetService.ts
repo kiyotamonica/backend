@@ -8,22 +8,26 @@ class DeletePetService {
     async execute({ id }: DeletePetProps){
 
         const findPet = await prismaClient.pet.findFirst({
-            where: {
-                id: id
-            }
+            where: { id }
         })
 
         if(!findPet){
             throw new Error("Pet não encontrado.")
         }
 
-        await prismaClient.pet.delete({
+        await prismaClient.medicao.deleteMany({
             where: {
-                id: findPet.id
+                idPet: id
             }
         })
 
-        return {message: "Deletado com sucesso."}
+        await prismaClient.pet.delete({
+            where: {
+                id: id
+            }
+        })
+
+        return {message: "Pet deletado com sucesso."}
     }
 }
 

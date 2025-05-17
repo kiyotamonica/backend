@@ -16,7 +16,7 @@ datasource db {
 model Medicao {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   idPet String @db.ObjectId
-  pet Pet @relation(fields: [idPet], references: [id])
+  pet Pet @relation(fields: [idPet], references: [id], onDelete: Cascade)
   frequencia_cardiaca Int
   oximetria Float
   timestamp DateTime @default(now())
