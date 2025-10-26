@@ -28,9 +28,11 @@ model Pet {
   idade Int
   raca String
   especie String
+  urlFoto String?
   idDono String @db.ObjectId
   dono Cliente @relation(fields: [idDono], references: [id])
   medicoes Medicao[]
+  coleiraId String? @unique
 }
 
 model Cliente {

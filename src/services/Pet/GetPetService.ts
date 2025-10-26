@@ -1,17 +1,24 @@
 import prismaClient from "../../prisma";
 
-class GetPetService {
-    async execute(){
-        
-        const pets = await prismaClient.pet.findMany({
-            include: {
-                dono: true,
-                medicoes: true
-            }
-        })
-
-        return pets;
-    }
+interface GetPetProps {
+  idDono?: string;
 }
 
-export { GetPetService }
+class GetPetService {
+  async execute({ idDono }: GetPetProps) {
+    
+    const whereClause = idDono ? { idDono: idDono } : {};
+
+    const pets = await prismaClient.pet.findMany({
+      where: whereClause,
+      include: {
+        dono: true,
+        medicoes: true,
+      },
+    });
+
+    return pets;
+  }
+}
+
+export { GetPetService };

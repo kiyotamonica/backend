@@ -9,6 +9,8 @@ import { DeletePetController } from "./controllers/Pet/DeletePetController";
 import { UpdatePetController } from "./controllers/Pet/UpdatePetController";
 import { CreateMedicaoController } from "./controllers/Medicao/CreateMedicaoController";
 import { GetMedicaoController } from "./controllers/Medicao/GetMedicaoController";
+import { LoginClienteController } from "./controllers/Cliente/LoginClienteController";
+import { UploadPetImageController } from "./controllers/Pet/UploadPetImageController";
 
 export async function routes(fastify: FastifyInstance, options: FastifyPluginOptions){
 
@@ -30,6 +32,10 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
         return new UpdateClienteController().handle(request, reply)
     })
 
+    fastify.post("/login", async (request: FastifyRequest, reply: FastifyReply) => {
+        return new LoginClienteController().handle(request, reply)
+    })
+
     //---------------------------------ROTAS PET--------------------------------------
 
     fastify.post("/pet", async (request: FastifyRequest, reply: FastifyReply) => {
@@ -46,6 +52,10 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
 
     fastify.patch("/pet", async(request: FastifyRequest, reply: FastifyReply) => {
         return new UpdatePetController().handle(request, reply)
+    })
+
+    fastify.post("/upload/pet-image", async(request: FastifyRequest, reply: FastifyReply) => {
+        return new UploadPetImageController().handle(request, reply)
     })
 
     //------------------------------ROTAS MEDICAO-------------------------------------

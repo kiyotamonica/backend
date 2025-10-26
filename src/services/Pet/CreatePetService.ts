@@ -5,11 +5,13 @@ interface CreatePetProps{
     idade: number,
     raca: string,
     especie: string,
-    idDono: string
+    idDono: string,
+    urlFoto?: string;
+    coleiraId?: string;
 }
 
 class CreatePetService {
-    async execute({ nome, idade, raca, especie, idDono }: CreatePetProps){
+    async execute({ nome, idade, raca, especie, idDono, urlFoto, coleiraId }: CreatePetProps){
 
         const pet = await prismaClient.pet.create({
             data:{
@@ -17,7 +19,9 @@ class CreatePetService {
                 idade,
                 raca,
                 especie,
-                idDono
+                idDono,
+                urlFoto,
+                coleiraId
             }
         })
 
